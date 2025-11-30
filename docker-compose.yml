@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: image_processor
+    volumes:
+      - .:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DJANGO_SETTINGS_MODULE=config.settings
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+volumes:
+  media_data:
